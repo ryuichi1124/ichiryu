@@ -1,0 +1,22 @@
+{% comment %}
+  Renders a Christmas badge (e.g., "事前予約特典" discount badge)
+  
+  Accepts:
+  - badge_text: {String} Badge text (optional, default: "事前予約特典")
+  - badge_type: {String} Badge type - "sale" or default (optional)
+  
+  Usage:
+  {% render 'christmas-badge', badge_text: '事前予約特典', badge_type: 'sale' %}
+{% endcomment %}
+
+{%- liquid
+  assign badge_text = badge_text | default: '事前予約特典'
+  assign badge_class = 'christmas-badge'
+  if badge_type == 'sale'
+    assign badge_class = 'christmas-badge sale'
+  endif
+-%}
+
+<span class="{{ badge_class }}">
+  {{ badge_text }}
+</span>

@@ -1,0 +1,36 @@
+{% comment %}
+  Renders Ichiryu logo (white or black text based on background)
+  
+  Accepts:
+  - logo_type: {String} 'white' or 'black' (optional, default: 'black')
+  - logo_class: {String} Additional CSS classes (optional)
+  - logo_width: {Number} Logo width in pixels (optional, default: 200)
+  
+  Usage:
+  {% render 'ichiryu-logo', logo_type: 'white', logo_class: 'custom-class', logo_width: 250 %}
+{% endcomment %}
+
+{%- liquid
+  assign logo_type = logo_type | default: 'black'
+  assign logo_class = logo_class | default: ''
+  assign logo_width = logo_width | default: 200
+  
+  if logo_type == 'white'
+    assign logo_url = 'https://cdn.shopify.com/s/files/1/0968/0689/5928/files/ichiryulogod.png?v=1762394601'
+    assign logo_alt = 'イチリュウ ロゴ（白文字）'
+  else
+    assign logo_url = 'https://cdn.shopify.com/s/files/1/0968/0689/5928/files/ichiryulogod2.png?v=1762394602'
+    assign logo_alt = 'イチリュウ ロゴ（黒文字）'
+  endif
+-%}
+
+<img 
+  src="{{ logo_url }}" 
+  alt="{{ logo_alt }}" 
+  class="ichiryu-logo {{ logo_class }}"
+  width="{{ logo_width }}"
+  height="auto"
+  style="max-width: {{ logo_width }}px; height: auto;"
+  loading="eager"
+>
+

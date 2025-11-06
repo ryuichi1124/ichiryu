@@ -1,0 +1,27 @@
+# Shopify Theme Files
+.DS_Store
+__MACOSX
+*.log
+*.zip
+*.swp
+*.swo
+*~
+
+# Node modules (if any)
+node_modules/
+
+# Environment files
+.env
+.env.local
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+

@@ -1,0 +1,848 @@
+/* クリスマスケーキ予約サイト カスタムテーマスタイル */
+
+/* Google Fonts の読み込み（theme.liquidで読み込む想定） */
+/* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600;700&display=swap'); */
+
+/* クリスマステーマカラーパレット */
+:root {
+  --christmas-cream: #FFF5E1;
+  --christmas-burgundy: #800020;
+  --christmas-gold: #D4AF37;
+  --christmas-deep-red: #8B0000;
+  --christmas-golden-brown: #8B4513;
+  --christmas-white: #FFFFFF;
+  
+  /* フォント設定 */
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Montserrat', sans-serif;
+  
+  /* トランジション */
+  --transition-smooth: all 0.3s ease;
+}
+
+/* グローバルスタイル */
+body {
+  font-family: var(--font-sans);
+  background-color: var(--christmas-cream);
+  color: var(--christmas-burgundy);
+}
+
+/* タイポグラフィ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  color: var(--christmas-burgundy);
+  line-height: 1.3;
+}
+
+/* ヒーローセクション（クリスマスケーキ用） */
+.christmas-hero {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+/* イチリュウ ヒーローバナー画像 - デフォルト画像として設定 */
+.banner .banner__media {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ヒーロー画像の横幅100%、切り取られないように */
+.banner__media img,
+.ichiryu-hero-image img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* PC: max-widthを設けて中央表示 */
+@media screen and (min-width: 750px) {
+  .banner .banner__media {
+    max-width: 1920px;
+    margin: 0 auto;
+  }
+  
+  .banner__media img,
+  .ichiryu-hero-image img {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+  }
+}
+
+/* スマホ: 100%表示 */
+@media screen and (max-width: 749px) {
+  .banner .banner__media {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .banner__media img,
+  .ichiryu-hero-image img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+/* テキストコンテンツを非表示 */
+.banner__content {
+  display: none !important;
+}
+
+/* image-bannerセクションにデフォルト画像を設定（画像が未設定の場合） */
+#Banner-image_banner .banner__media:not(:has(img[src]))::before,
+.banner--ichiryu-hero .banner__media::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://cdn.shopify.com/s/files/1/0968/0689/5928/files/ichiryu_Xmas_H1_HI.jpg?v=1762394313');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+/* 画像が設定されている場合は、背景画像をオーバーレイとして使用 */
+#Banner-image_banner .banner__media::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://cdn.shopify.com/s/files/1/0968/0689/5928/files/ichiryu_Xmas_H1_HI.jpg?v=1762394313');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  opacity: 0.3;
+}
+
+#Banner-image_banner .banner__media img {
+  position: relative;
+  z-index: 1;
+}
+
+/* モバイル用ヒーローバナー調整 */
+@media screen and (max-width: 749px) {
+  #Banner-image_banner {
+    min-height: 50vh;
+  }
+  
+  #Banner-image_banner .banner__media::after {
+    opacity: 0.5;
+  }
+}
+
+.christmas-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(128, 0, 32, 0.3) 0%,
+    rgba(212, 175, 55, 0.2) 100%
+  );
+  z-index: 1;
+}
+
+.christmas-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: var(--christmas-white);
+  padding: 2rem;
+  max-width: 800px;
+}
+
+.christmas-hero-title {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-family: var(--font-serif);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  line-height: 1.2;
+}
+
+.christmas-hero-subtitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  line-height: 1.6;
+}
+
+/* CTAボタン（予約ボタン） - 既存のShopifyボタンクラスに統合 */
+.button,
+.btn,
+a.button,
+a.btn,
+button[type="submit"],
+.button--primary,
+.button--secondary {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  transition: var(--transition-smooth);
+  border-radius: 50px;
+  padding: 1rem 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.button--primary,
+.btn--primary,
+.button.button--primary {
+  background: linear-gradient(135deg, var(--christmas-gold) 0%, var(--christmas-golden-brown) 100%);
+  color: var(--christmas-white);
+  border: none;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+}
+
+.button--primary::before,
+.btn--primary::before,
+.button.button--primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.button--primary:hover::before,
+.btn--primary:hover::before,
+.button.button--primary:hover::before {
+  left: 100%;
+}
+
+.button--primary:hover,
+.btn--primary:hover,
+.button.button--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+  background: linear-gradient(135deg, var(--christmas-golden-brown) 0%, var(--christmas-gold) 100%);
+}
+
+.button--primary:active,
+.btn--primary:active,
+.button.button--primary:active {
+  transform: translateY(0);
+}
+
+/* クリスマス専用CTAボタン */
+.christmas-cta-button {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--christmas-gold) 0%, var(--christmas-golden-brown) 100%);
+  color: var(--christmas-white);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.christmas-cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.christmas-cta-button:hover::before {
+  left: 100%;
+}
+
+.christmas-cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+  background: linear-gradient(135deg, var(--christmas-golden-brown) 0%, var(--christmas-gold) 100%);
+}
+
+.christmas-cta-button:active {
+  transform: translateY(0);
+}
+
+/* 商品カード（クリスマスケーキ用） - 既存のShopifyカードクラスに統合 */
+.card-wrapper .card--card,
+.card-wrapper .card--standard .card__inner {
+  background: var(--christmas-white);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  border-color: rgba(128, 0, 32, 0.1);
+}
+
+.card-wrapper:hover .card--card,
+.card-wrapper:hover .card--standard .card__inner {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(128, 0, 32, 0.2);
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.card-wrapper .card__media img,
+.card-wrapper .card__media .media img {
+  transition: var(--transition-smooth);
+}
+
+.card-wrapper:hover .card__media img,
+.card-wrapper:hover .card__media .media img {
+  transform: scale(1.05);
+}
+
+.card-information {
+  padding: 1.5rem;
+}
+
+.card__heading {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--christmas-burgundy);
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.card__heading a {
+  color: var(--christmas-burgundy);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.card__heading a:hover {
+  color: var(--christmas-gold);
+}
+
+/* 価格表示のスタイル - 既存のShopifyクラスに統合 */
+.price,
+.price__regular,
+.price__sale,
+.price-item {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--christmas-gold);
+  margin-bottom: 1rem;
+}
+
+.price .price-item--regular,
+.price__regular .price-item--regular,
+.price-item--regular {
+  color: var(--christmas-gold);
+  font-weight: 700;
+}
+
+.price .price-item--sale,
+.price__sale .price-item--sale,
+.price-item--sale {
+  color: var(--christmas-deep-red);
+  font-weight: 700;
+}
+
+.price.price--on-sale .price-item--regular,
+.price__regular:has(.price-item--sale) .price-item--regular,
+.price-item--regular:has(+ .price-item--sale) {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 0.9rem;
+  margin-right: 0.5rem;
+}
+
+/* 価格ラッパー */
+.price-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.price-wrapper .christmas-badge {
+  align-self: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+/* カード情報内の価格表示 */
+.card__information .price {
+  margin-top: 0.5rem;
+}
+
+/* クリスマスケーキ専用の商品カードクラス（既存クラスとの併用） */
+.christmas-product-card {
+  background: var(--christmas-white);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.christmas-product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(128, 0, 32, 0.2);
+}
+
+.christmas-product-card-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  transition: var(--transition-smooth);
+}
+
+.christmas-product-card:hover .christmas-product-card-image {
+  transform: scale(1.05);
+}
+
+.christmas-product-card-content {
+  padding: 1.5rem;
+}
+
+.christmas-product-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--christmas-burgundy);
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.christmas-product-card-price {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--christmas-gold);
+  margin-bottom: 1rem;
+}
+
+.christmas-product-card-price .original-price {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 0.9rem;
+  margin-right: 0.5rem;
+}
+
+.christmas-product-card-price .sale-price {
+  color: var(--christmas-gold);
+  font-weight: 700;
+}
+
+/* 商品一覧グリッド - 中央表示、PC4列、スマホ2列 */
+.grid.product-grid,
+.collection .product-grid {
+  gap: 2rem;
+  margin: 0 auto;
+  justify-content: center;
+  display: grid;
+  width: 100%;
+  padding: 2rem 0;
+}
+
+/* PC: 4列表示、中央表示 */
+@media screen and (min-width: 750px) {
+  .grid.product-grid,
+  .collection .product-grid {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .grid.product-grid .grid__item,
+  .collection .product-grid .grid__item {
+    width: 100%;
+    margin-bottom: 0;
+  }
+}
+
+/* スマホ: 2列表示 */
+@media screen and (max-width: 749px) {
+  .grid.product-grid,
+  .collection .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .grid.product-grid .grid__item,
+  .collection .product-grid .grid__item {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 0;
+  }
+}
+
+/* 商品一覧セクションを中央表示 */
+.collection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.collection__title {
+  text-align: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@media screen and (max-width: 749px) {
+  .collection__title {
+    padding: 0 1rem;
+  }
+}
+
+/* slider-component内のグリッドも中央表示 */
+.slider-component .product-grid {
+  margin: 0 auto;
+  justify-content: center;
+}
+
+@media screen and (min-width: 750px) {
+  .slider-component .product-grid {
+    max-width: 1400px;
+    padding: 0 2rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .slider-component .product-grid {
+    padding: 0 1rem;
+  }
+}
+
+/* クリスマスケーキ専用の商品グリッド */
+.christmas-product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+@media screen and (max-width: 749px) {
+  .christmas-product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+}
+
+/* セクションタイトル - 既存のShopifyクラスに統合 */
+.collection-hero__title,
+.section-header__title,
+.featured-collection__title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--christmas-burgundy);
+  margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.collection-hero__title::after,
+.section-header__title::after,
+.featured-collection__title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--christmas-gold), transparent);
+}
+
+.collection-hero__description {
+  font-family: var(--font-sans);
+  color: var(--christmas-burgundy);
+  opacity: 0.8;
+  line-height: 1.6;
+}
+
+/* クリスマス専用セクションタイトル */
+.christmas-section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  text-align: center;
+  color: var(--christmas-burgundy);
+  margin-bottom: 3rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.christmas-section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--christmas-gold), transparent);
+}
+
+/* バッジ（予約特典など） - 既存のShopifyバッジクラスに統合 */
+.badge {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+}
+
+.badge.color-scheme-1,
+.badge.color-scheme-2 {
+  border-radius: 20px;
+  padding: 0.4rem 1rem;
+  font-size: 0.85rem;
+}
+
+/* クリスマス専用バッジ */
+.christmas-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--christmas-gold) 0%, var(--christmas-golden-brown) 100%);
+  color: var(--christmas-white);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+}
+
+.christmas-badge.sale {
+  background: linear-gradient(135deg, var(--christmas-deep-red) 0%, var(--christmas-burgundy) 100%);
+  box-shadow: 0 2px 8px rgba(139, 0, 0, 0.3);
+}
+
+/* イチリュウロゴ画像 */
+.ichiryu-logo,
+.header__heading-logo.ichiryu-logo {
+  max-width: 200px;
+  height: auto;
+  display: block;
+}
+
+.header__heading-logo-wrapper .ichiryu-logo {
+  width: auto;
+  height: auto;
+  max-width: 200px;
+}
+
+@media screen and (max-width: 749px) {
+  .ichiryu-logo,
+  .header__heading-logo.ichiryu-logo {
+    max-width: 150px;
+  }
+}
+
+/* ナビゲーション */
+.christmas-nav {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.christmas-nav-link {
+  color: var(--christmas-burgundy);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+  position: relative;
+}
+
+.christmas-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--christmas-gold);
+  transition: width 0.3s ease;
+}
+
+.christmas-nav-link:hover::after {
+  width: 100%;
+}
+
+.christmas-nav-link:hover {
+  color: var(--christmas-gold);
+}
+
+/* フッター */
+.christmas-footer {
+  background: var(--christmas-burgundy);
+  color: var(--christmas-white);
+  padding: 3rem 0 1.5rem;
+  margin-top: 4rem;
+}
+
+.christmas-footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.christmas-footer-text {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-bottom: 1rem;
+}
+
+/* レスポンシブ調整 */
+@media screen and (max-width: 749px) {
+  .christmas-hero {
+    min-height: 50vh;
+  }
+  
+  .christmas-hero-title {
+    font-size: 2rem;
+  }
+  
+  .christmas-hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .christmas-cta-button {
+    font-size: 1rem;
+    padding: 0.875rem 2rem;
+  }
+  
+  .christmas-product-card-content {
+    padding: 1rem;
+  }
+  
+  .christmas-section-title {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+  }
+}
+
+/* アニメーション */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.christmas-fade-in {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* スノーフレークエフェクト（オプション） */
+.christmas-snowflake {
+  position: absolute;
+  top: -10px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  animation: fall linear infinite;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+/* 商品詳細ページ */
+.christmas-product-detail {
+  background: var(--christmas-white);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.christmas-product-detail-title {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  color: var(--christmas-burgundy);
+  margin-bottom: 1rem;
+}
+
+.christmas-product-detail-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--christmas-gold);
+  margin-bottom: 1.5rem;
+}
+
+/* フォーム要素 */
+.christmas-form-input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid rgba(128, 0, 32, 0.2);
+  border-radius: 8px;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  transition: var(--transition-smooth);
+  background: var(--christmas-white);
+}
+
+.christmas-form-input:focus {
+  outline: none;
+  border-color: var(--christmas-gold);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+.christmas-form-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  color: var(--christmas-burgundy);
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
